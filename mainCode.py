@@ -11,25 +11,38 @@ def speak(text):
     engine.runAndWait()
 
 def processCommand(c):
-    print(c)
+    if "open google" in c.lower():
+        webbrowser.open("https://www.google.com")
+        speak("Opening Google.")
 
-          
+    elif "open facebook" in c.lower():
+        webbrowser.open("https://www.facebook.com")
+        speak("Opening Facebook.")
+
+    elif "open youtube" in c.lower():
+        webbrowser.open("https://youtube.com")
+        speak("Opening Youtube.")
+
+    elif "open linkedin" in c.lower():
+        webbrowser.open("https://linkedin.com")
+        speak("Opening Linkedin.")
+        
 if __name__=="__main__":
     speak("Hello, I am JARVIS. Your Personnel Assistance. How can i help You?")
 
     while True:
         r = sr.Recognizer()
         
-
         try:
             with sr.Microphone() as source:
                 print("Listening...")
                 audio = r.listen(source, timeout=2, phrase_time_limit=2)
             command = r.recognize_google(audio)
             print(command)
-            
+
             if(command.lower()=="jarvis"):
                 speak("Yes")
+
                 with sr.Microphone() as source:
                     print("Listening...")
                     audio = r.listen(source, timeout=2, phrase_time_limit=2)
