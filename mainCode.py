@@ -1,15 +1,20 @@
+from urllib.request import Request
 import speech_recognition as sr
 import pyaudio
 import setuptools
 import webbrowser
 import pyttsx3
 import musicLib
+import requests
 
+recognizer = sr.Recognizer()
 engine = pyttsx3.init()
+newsapi = "2e2288b906d54fe1a668f9447a676d57"
 
 def speak(text):
     engine.say(text)
     engine.runAndWait()
+
 
 def processCommand(c):
     if "open google" in c.lower():
@@ -32,6 +37,21 @@ def processCommand(c):
         song = c.lower().split(" ")[1]
         link = musicLib.music[song]
         webbrowser.open(link)
+
+    elif "news" in c.lower():
+        response = requests.get(f"https://newsapi.org/v2/top-headlines?country=us&apiKey={newsapi}")
+        if response.status_code == 200:
+            # Parse the JSON response
+            data = response.json()
+            
+            # Extract the articles
+            articles = data.get('articles', [])
+            
+            # Print the headlines
+            for article in articles:
+                speak(article['title'])
+                
+
 
 if __name__=="__main__":
     speak("Hello, I am JARVIS. Your Personnel Assistance. How can i help You?")
