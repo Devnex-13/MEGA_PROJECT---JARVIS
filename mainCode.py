@@ -3,6 +3,7 @@ import pyaudio
 import setuptools
 import webbrowser
 import pyttsx3
+import musicLib
 
 engine = pyttsx3.init()
 
@@ -26,7 +27,12 @@ def processCommand(c):
     elif "open linkedin" in c.lower():
         webbrowser.open("https://linkedin.com")
         speak("Opening Linkedin.")
-        
+
+    elif c.lower().startswith("play"):
+        song = c.lower().split(" ")[1]
+        link = musicLib.music[song]
+        webbrowser.open(link)
+
 if __name__=="__main__":
     speak("Hello, I am JARVIS. Your Personnel Assistance. How can i help You?")
 
