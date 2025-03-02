@@ -17,6 +17,21 @@ def speak(text):
     engine.runAndWait()
 
 
+def aiProcess(command):
+    client = OpenAI(
+            api_key="sk-mnopqrstijkl5678mnopqrstijkl5678mnopqrst"
+        )
+
+    completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messeges=[
+        {"role":"system","content":"You Are The Virtual Assistance like Alexa and google."},
+        {"role":"user","content":"What is Coding"}
+        ]
+    )
+
+    return completion.choices[0].messege.content
+
 
 def processCommand(c):
     if "open google" in c.lower():
@@ -56,9 +71,9 @@ def processCommand(c):
                 speak(article['title'])
             
     else:
-        
+        output = aiProcess(c)
+        speak(output)
                 
-
 
 if __name__=="__main__":
     speak("Hello, I am JARVIS. Your Personnel Assistance. How can i help You?")
