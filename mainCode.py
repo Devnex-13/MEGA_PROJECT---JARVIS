@@ -10,6 +10,9 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
+def processCommand(c):
+    print(c)
+
           
 if __name__=="__main__":
     speak("Hello, I am JARVIS. Your Personnel Assistance. How can i help You?")
@@ -24,9 +27,14 @@ if __name__=="__main__":
                 audio = r.listen(source, timeout=2, phrase_time_limit=2)
             command = r.recognize_google(audio)
             print(command)
-
+            
             if(command.lower()=="jarvis"):
                 speak("Yes")
+                with sr.Microphone() as source:
+                    print("Listening...")
+                    audio = r.listen(source, timeout=2, phrase_time_limit=2)
+                    command = r.recognize_google(audio)
+                    processCommand(command)
                 
         except Exception as e:
             print("Error {e};")
