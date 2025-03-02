@@ -6,6 +6,7 @@ import webbrowser
 import pyttsx3
 import musicLib
 import requests
+from openai import OpenAI
 
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
@@ -14,6 +15,7 @@ newsapi = "2e2288b906d54fe1a668f9447a676d57"
 def speak(text):
     engine.say(text)
     engine.runAndWait()
+
 
 
 def processCommand(c):
@@ -40,6 +42,8 @@ def processCommand(c):
 
     elif "news" in c.lower():
         response = requests.get(f"https://newsapi.org/v2/top-headlines?country=us&apiKey={newsapi}")
+
+        # Search In GPT Hoe Fetch Titles of news from above link.
         if response.status_code == 200:
             # Parse the JSON response
             data = response.json()
@@ -50,6 +54,9 @@ def processCommand(c):
             # Print the headlines
             for article in articles:
                 speak(article['title'])
+            
+    else:
+        
                 
 
 
