@@ -1,15 +1,16 @@
 from openai import OpenAI
 
-client = OpenAI(
-    api_key="sk-mnopqrstijkl5678mnopqrstijkl5678mnopqrst"
-)
+client = OpenAI()
 
 completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messeges=[
-        {"role":"system","content":"You Are The Virtual Assistance like Alexa and google."},
-        {"role":"user","content":"What is Coding"}
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {
+            "role": "user",
+            "content": str(input("Enter Question::"))
+        }
     ]
 )
 
-print(completion.choices[0].messege.content)
+print(completion.choices[0].message.content)

@@ -18,9 +18,7 @@ def speak(text):
 
 
 def aiProcess(command):
-    client = OpenAI(
-            api_key="sk-mnopqrstijkl5678mnopqrstijkl5678mnopqrst"
-        )
+    client = OpenAI()
 
     completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
@@ -31,7 +29,6 @@ def aiProcess(command):
     )
 
     return completion.choices[0].messege.content
-
 
 def processCommand(c):
     if "open google" in c.lower():
@@ -76,7 +73,7 @@ def processCommand(c):
                 
 
 if __name__=="__main__":
-    speak("Hello, I am JARVIS. Your Personnel Assistance. How can i help You?")
+    speak("Hello, I am JARVIS. How can i help You?")
 
     while True:
         r = sr.Recognizer()
