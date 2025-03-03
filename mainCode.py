@@ -21,14 +21,17 @@ def aiProcess(command):
     client = OpenAI()
 
     completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messeges=[
-        {"role":"system","content":"You Are The Virtual Assistance like Alexa and google."},
-        {"role":"user","content":"What is Coding"}
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {
+                "role": "user",
+                "content": str(command)
+            }
         ]
     )
 
-    return completion.choices[0].messege.content
+    return completion.choices[0].message.content
 
 def processCommand(c):
     if "open google" in c.lower():
@@ -70,7 +73,7 @@ def processCommand(c):
     else:
         output = aiProcess(c)
         speak(output)
-                
+                 
 
 if __name__=="__main__":
     speak("Hello, I am JARVIS. How can i help You?")
