@@ -10,7 +10,7 @@ from openai import OpenAI
 
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
-newsapi = "2e2288b906d54fe1a668f9447a676d57"
+newsapi = "3e3388b906d54fe1a668f9447a766d75"
 
 def speak(text):
     engine.say(text)
